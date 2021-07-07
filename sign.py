@@ -5,7 +5,7 @@ import base64
 import sys, getopt
 
 msg = ""
-secret_key_path = "validator_keys/signer_secret_key.pem"
+secret_key_path = "/etc/casper/validator_keys/secret_key.pem"
 
 try:
     opts, args = getopt.getopt(sys.argv[1:],"hm:k:",["message=","secretkey="])
