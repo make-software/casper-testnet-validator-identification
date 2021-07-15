@@ -9,7 +9,9 @@ Install them by issuing the following commands:
 
 `sudo apt update && sudo apt install git`
 
-`pip install cryptography`
+`sudo apt install python3-pip`
+
+`sudo -H pip install cryptography`
 
 ## Installation
 
