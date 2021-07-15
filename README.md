@@ -37,6 +37,8 @@ Sign your email address with your secret key:
 You will get an output similar to this:
 
 ```bash
+Public Key:
+ 0118157c4c169d3534742084bfca4b891606958a96dc46f54444f0a790ef096d28
 Message:
  me@mydomain.com
 Signature:
