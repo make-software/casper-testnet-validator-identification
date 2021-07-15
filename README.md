@@ -32,7 +32,7 @@ Enter the clone directory:
 
 Sign your email address with your secret key:
 
-`./sign.py -m YOUR-EMAIL-ADDRESS`
+`sudo -u casper ./sign.py -m YOUR-EMAIL-ADDRESS`
 
 You will get an output similar to this:
 
