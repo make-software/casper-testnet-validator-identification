@@ -26,7 +26,16 @@ if msg == "":
     sys.exit()
 
 msg_as_bytes = str.encode(msg)
-signature = ecc_ed25519.get_signature_from_pem_file(msg_as_bytes, secret_key_path)
+
+try:
+    signature = ecc_ed25519.get_signature_from_pem_file(msg_as_bytes, secret_key_path)
+except FileNotFoundError:
+    print("ERROR: Couldn't access your private key at this location: ", secret_key_path)
+    print("Please make sure your secret_key.pem file is at the given location and is accessible by the current user.")
+    print("If you have your key at a different location, you can define its path by using the -k parameter.")
+    print("Usage: sign.py -m YOURMESSAGE -k PATH-TO-YOUR-SECRET-KEY")
+    sys.exit()
+
 encoded_signature = signature.hex()
 
 print("Message:\n", msg)
