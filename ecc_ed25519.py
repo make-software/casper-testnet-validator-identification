@@ -97,3 +97,17 @@ def _get_key_pair(sk: ed25519.Ed25519PrivateKey) -> typing.Tuple[bytes, bytes]:
             encoding=serialization.Encoding.Raw,
             format=serialization.PublicFormat.Raw
         )
+
+def get_public_key_hex_from_pem_file(fpath: str) -> str:
+    """Returns a hex representation of ED25519 public key from a PEM file.
+
+    """
+    pvk = ed25519.Ed25519PrivateKey.from_private_bytes(get_pvk_from_pem_file(fpath))
+    pk = pvk.public_key()
+    pk_bytes = pk.public_bytes(
+        encoding=serialization.Encoding.Raw,
+        format=serialization.PublicFormat.Raw
+    )
+    pk_hex = pk_bytes.hex()
+
+    return pk_hex
