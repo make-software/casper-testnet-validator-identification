@@ -30,7 +30,7 @@ for opt, arg in opts:
         loaded_public_key = ed25519.Ed25519PublicKey.from_public_bytes(public_bytes_from_hex)
     elif opt in ("-s", "--b64signature"):
         encoded_signature = arg
-        signature = base64.b64decode(encoded_signature)
+        signature = bytes.fromhex(encoded_signature)
 
 if msg == "" or public_key_hex == "" or encoded_signature == "":
     print("All arguments are required!")
