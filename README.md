@@ -8,6 +8,7 @@ Helper scripts to sign a given message by using the validator secret key (ed2551
 Install them by issuing the following commands:
 
 `sudo apt update && sudo apt install git`
+
 `pip install cryptography`
 
 ## Installation
