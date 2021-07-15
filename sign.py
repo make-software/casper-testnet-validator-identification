@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 
 import ecc_ed25519
-import base64
 import sys, getopt
 
 msg = ""
