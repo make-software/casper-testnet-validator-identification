@@ -38,5 +38,11 @@ except FileNotFoundError:
 
 encoded_signature = signature.hex()
 
+# Get public key hex from the secret PEM file for informational purposes
+public_key_hex = ecc_ed25519.get_public_key_hex_from_pem_file(secret_key_path)
+# Add prefix
+public_key_hex = "01" + public_key_hex
+
+print("Public Key:\n", public_key_hex)
 print("Message:\n", msg)
 print("Signature:\n", encoded_signature)
