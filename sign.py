@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 
 import ecc_ed25519
-import base64
 import sys, getopt
 
 msg = ""
@@ -27,8 +26,23 @@ if msg == "":
     sys.exit()
 
 msg_as_bytes = str.encode(msg)
-signature = ecc_ed25519.get_signature_from_pem_file(msg_as_bytes, secret_key_path)
-encoded_signature = base64.b64encode(signature)
 
-print("Your message:\n", msg)
-print("Signature for your message:\n", encoded_signature)
+try:
+    signature = ecc_ed25519.get_signature_from_pem_file(msg_as_bytes, secret_key_path)
+except FileNotFoundError:
+    print("ERROR: Couldn't access your private key at this location: ", secret_key_path)
+    print("Please make sure your secret_key.pem file is at the given location and is accessible by the current user.")
+    print("If you have your key at a different location, you can define its path by using the -k parameter.")
+    print("Usage: sign.py -m YOURMESSAGE -k PATH-TO-YOUR-SECRET-KEY")
+    sys.exit()
+
+encoded_signature = signature.hex()
+
+# Get public key hex from the secret PEM file for informational purposes
+public_key_hex = ecc_ed25519.get_public_key_hex_from_pem_file(secret_key_path)
+# Add prefix
+public_key_hex = "01" + public_key_hex
+
+print("Public Key:\n", public_key_hex)
+print("Message:\n", msg)
+print("Signature:\n", encoded_signature)
