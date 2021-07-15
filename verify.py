@@ -38,11 +38,18 @@ if msg == "" or encoded_signature == "":
 # Read the public_key_hex from default location if not given as param
 if public_key_hex == "":
     public_key_hex_location = "/etc/casper/validator_keys/public_key_hex"
-    with open(public_key_hex_location, 'r') as fstream:
-        public_key_hex = fstream.readlines()[0]
-        # Get rid of the prefix
-        public_bytes_from_hex = bytes.fromhex(public_key_hex[2:])
-        loaded_public_key = ed25519.Ed25519PublicKey.from_public_bytes(public_bytes_from_hex)
+    try:
+        with open(public_key_hex_location, 'r') as fstream:
+            public_key_hex = fstream.readlines()[0]
+            # Get rid of the prefix
+            public_bytes_from_hex = bytes.fromhex(public_key_hex[2:])
+            loaded_public_key = ed25519.Ed25519PublicKey.from_public_bytes(public_bytes_from_hex)
+    except:
+        print("ERROR: Couldn't access your public key hex at this location: ", public_key_hex_location)
+        print("Please make sure your public_key_hex file is at the given location and is accessible by the current user.")
+        print("You can also directly provide your public key as an input parameter.")
+        print("USAGE: verify.py -m YOURMESSAGE -k PUBLIC-KEY-HEX -s SIGNATURE")
+        sys.exit()
 
 print("Public Key:\n", public_key_hex)
 print("Message:\n", msg)
