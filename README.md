@@ -51,11 +51,13 @@ You can verify your signature before submitting it via the provided form to make
 
 Issue this command to verify your signature:
 
-  `./verify.py -m YOUR-EMAIL-ADDRESS -k YOUR-PUBLIC-KEY-HEX -s SIGNATURE`
+  `./verify.py -m YOUR-EMAIL-ADDRESS -s SIGNATURE`
 
 You should get an output similar to this:
 
 ```bash
+Public Key:
+ 0118157c4c169d3534742084bfca4b891606958a96dc46f54444f0a790ef096d28
 Message:
  me@mydomain.com
 Signature:

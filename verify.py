@@ -24,8 +24,7 @@ for opt, arg in opts:
     elif opt in ("-k", "--publickeyhex"):
         public_key_hex = arg
         # Get rid of the prefix 01
-        public_key_hex = public_key_hex[2:]
-        public_bytes_from_hex = bytes.fromhex(public_key_hex)
+        public_bytes_from_hex = bytes.fromhex(public_key_hex[2:])
         loaded_public_key = ed25519.Ed25519PublicKey.from_public_bytes(public_bytes_from_hex)
     elif opt in ("-s", "--signature"):
         encoded_signature = arg
@@ -42,8 +41,7 @@ if public_key_hex == "":
     with open(public_key_hex_location, 'r') as fstream:
         public_key_hex = fstream.readlines()[0]
         # Get rid of the prefix
-        public_key_hex = public_key_hex[2:]
-        public_bytes_from_hex = bytes.fromhex(public_key_hex)
+        public_bytes_from_hex = bytes.fromhex(public_key_hex[2:])
         loaded_public_key = ed25519.Ed25519PublicKey.from_public_bytes(public_bytes_from_hex)
 
 print("Public Key:\n", public_key_hex)
