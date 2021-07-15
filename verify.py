@@ -36,8 +36,8 @@ if msg == "" or public_key_hex == "" or encoded_signature == "":
     print('./verify.py -m YOURMESSAGE -k PUBLIC-KEY-HEX -s SIGNATURE')
     sys.exit()
 
-print("Your message:\n", msg)
-print("Signature for your message:\n", encoded_signature)
+print("Message:\n", msg)
+print("Signature:\n", encoded_signature)
 
 # Verify
 try:

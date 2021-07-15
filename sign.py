@@ -29,5 +29,5 @@ msg_as_bytes = str.encode(msg)
 signature = ecc_ed25519.get_signature_from_pem_file(msg_as_bytes, secret_key_path)
 encoded_signature = signature.hex()
 
-print("Your message:\n", msg)
-print("Signature for your message:\n", encoded_signature)
+print("Message:\n", msg)
+print("Signature:\n", encoded_signature)

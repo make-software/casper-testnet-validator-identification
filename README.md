@@ -1,30 +1,67 @@
-# Ed25519-sign-and-verify
+# casper-testnet-validator-identification
 
-Helper scripts to sign a given message by using an ed25519 secret key (PEM) file, and then to verify the signed message by using the public key in hex format.
+Helper scripts to sign a given message by using the validator secret key (ed25519 algorithm) (PEM) file, and then to verify the signed message by using the public key in hex format.
 
 ## Prerequisites
-A GNU/Linux environment with Python 3 and git.
+`Python 3`, `git` and the `cryptography` library of Python are needed on your node with a GNU/Linux environment (preferably Ubuntu 20.04.)
+
+Install them by issuing the following commands:
+
+`sudo apt update && sudo apt install git`
+`pip install cryptography`
 
 ## Installation
 
-On Ubuntu 20.04:
-`sudo apt update && sudo apt install git && git clone https://github.com/mrkara/Ed25519-sign-and-verify.git`
+Go to your home directory:
 
-## Usage
+`cd ~`
 
-First, get into the clone directory:
+Clone the repository:
 
-`cd Ed25519-sign-and-verify`
+`git clone https://github.com/make-software/casper-testnet-validator-identification.git`
 
-Then;
+## Instructions
 
-* To sign:
+Move to your home directory (or the directory where you cloned/installed the repo in the installation step):
 
-  `./sign -m YOURMESSAGE -k PATH-TO-YOUR-SECRET-KEY.pem`
+`cd ~`
 
-* To verify:
+Enter the clone directory:
 
-  `./verify -m YOURMESSAGE -k YOUR-PUBLIC-KEY-HEX -s SIGNATURE-IN-BASE-64-FORMAT`
+`cd casper-testnet-validator-identification`
+
+Sign your email address with your secret key:
+
+`./sign.py -m YOUR-EMAIL-ADDRESS`
+
+You will get an output similar to this:
+
+```bash
+Message:
+ me@mydomain.com
+Signature:
+ fcb9216b98e589686633df826af4d37839f67ea12dbf09264db346d0e6cf0a1725a7aedba7d824498e2e0cf83e3d461ac0257ad204f3f3229c2f184d86295706
+ ```
+
+ **Copy and paste the signature to the Casper Testnet Public Key and Email Verification form.**
+
+### Optional
+
+You can verify your signature before submitting it via the provided form to make sure there are no errors.
+
+Issue this command to verify your signature:
+
+  `./verify.py -m YOUR-EMAIL-ADDRESS -k YOUR-PUBLIC-KEY-HEX -s SIGNATURE`
+
+You should get an output similar to this:
+
+```bash
+Message:
+ me@mydomain.com
+Signature:
+ fcb9216b98e589686633df826af4d37839f67ea12dbf09264db346d0e6cf0a1725a7aedba7d824498e2e0cf83e3d461ac0257ad204f3f3229c2f184d86295706
+Verified!
+```
 
 ## Credits
 * Uses the [ecc_ed25519.py](https://github.com/momipsl/pycspr/blob/main/pycspr/crypto/ecc_ed25519.py) module from [pycspr](https://github.com/momipsl/pycspr)
