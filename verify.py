@@ -31,10 +31,20 @@ for opt, arg in opts:
         encoded_signature = arg
         signature = bytes.fromhex(encoded_signature)
 
-if msg == "" or public_key_hex == "" or encoded_signature == "":
-    print("All arguments are required!")
+if msg == "" or encoded_signature == "":
+    print("Message and signature are required!")
     print('./verify.py -m YOURMESSAGE -k PUBLIC-KEY-HEX -s SIGNATURE')
     sys.exit()
+
+# Read the public_key_hex from default location if not given as param
+if public_key_hex == "":
+    public_key_hex_location = "/etc/casper/validator_keys/public_key_hex"
+    with open(public_key_hex_location, 'r') as fstream:
+        public_key_hex = fstream.readlines()[0]
+        # Get rid of the prefix
+        public_key_hex = public_key_hex[2:]
+        public_bytes_from_hex = bytes.fromhex(public_key_hex)
+        loaded_public_key = ed25519.Ed25519PublicKey.from_public_bytes(public_bytes_from_hex)
 
 print("Public Key:\n", public_key_hex)
 print("Message:\n", msg)
